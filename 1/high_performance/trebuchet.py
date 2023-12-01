@@ -1003,7 +1003,7 @@ six2twobgzsfsptlqnine42xtmdprjqc
 pxreightwo7"""
 
 
-first_last_nb_pattern: re.Pattern = re.compile(r".*?(?P<first>\d)(.*(?P<last>\d).*)?")
+first_last_nb_pattern: re.Pattern = re.compile(r"(?P<first>\d)(.*(?P<last>\d).*)?", flags=re.MULTILINE)
 
 
 matches = first_last_nb_pattern.findall(string=words)
