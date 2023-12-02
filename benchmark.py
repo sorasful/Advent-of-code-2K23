@@ -8,7 +8,7 @@ def execute_script(file_path: str) -> str:
     return output.decode().strip()
 
 
-def measure_script(file_path: str) -> str:
+def measure_script(file_path: str) -> None:
     output = subprocess.check_output(
         f"python -m cProfile -s cumtime {file_path} | grep 'function calls'", shell=True
     )
