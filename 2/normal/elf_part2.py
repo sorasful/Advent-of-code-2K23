@@ -99,13 +99,14 @@ Game 98: 5 blue, 6 red; 8 red; 1 green, 9 blue, 5 red
 Game 99: 4 green, 3 red; 3 green; 1 red, 2 green; 2 red, 1 green, 2 blue; 2 red, 4 green; 1 green, 2 blue, 1 red
 Game 100: 3 blue, 3 red, 6 green; 7 red, 2 green, 16 blue; 14 green, 9 red, 9 blue; 8 red, 10 green, 9 blue; 6 blue, 11 red""".splitlines()
 
-valid_ids = []
+total_power = 0
 for line in lines:
     game, draws = line.split(":")
     game_id = int(game.split(" ")[-1])
 
     is_valid = True
 
+    draws_count = {}
     draws = draws.split(";")
     for draw in draws:
         colors = draw.split(",")
@@ -114,20 +115,15 @@ for line in lines:
             color_name = color.split(" ")[-1]
             nb_color = int(color.split(" ")[0])
 
-            if color_name == "red" and nb_color > 12:
-                is_valid = False
-                break
+            if color_name in draws_count:
+                if nb_color > draws_count[color_name]:
+                    draws_count[color_name] = nb_color
+            else:
+                draws_count[color_name] = nb_color
 
-            if color_name == "green" and nb_color > 13:
-                is_valid = False
-                break
+    cube_power = draws_count["red"] * draws_count["green"] * draws_count["blue"]
 
-            if color_name == "blue" and nb_color > 14:
-                is_valid = False
-                break
+    total_power += cube_power
 
-    if is_valid:
-        valid_ids.append(game_id)
 
-# print(sum(valid_ids))SALUT MAMAN
-# ////
+print(total_power)
