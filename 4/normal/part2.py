@@ -191,7 +191,7 @@ Card 186: 14 21 68  8 64 78 15 89 19 59 | 43 22 10 85 63 60 90 62 97 17 33 39  7
 lines = text.splitlines()
 card_copies = defaultdict(lambda: 1)
 for line in lines:
-    game_name, winning_numbers, our_numbers = re.split(":|\|", line)
+    game_name, winning_numbers, our_numbers = re.split("[:|]", line)
     game_id = int(game_name.split()[-1])
 
     winning_numbers = winning_numbers.strip().split()
