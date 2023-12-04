@@ -188,10 +188,12 @@ Card 184: 95 26 39 98 51 33 67 43 59 11 | 19 44 30 10 18 47 57 95 25 78 53 61  2
 Card 185:  7 16 46 63 13  2 99  9 93 26 | 37 28 50 41 55 75 73  6 96 82 17 92 87 10 49 72 15 86 64 36 95 32 13  5 53
 Card 186: 14 21 68  8 64 78 15 89 19 59 | 43 22 10 85 63 60 90 62 97 17 33 39  7  6 58 51 47 54 11 50 36  2 31 46 34"""
 
+
 lines = text.splitlines()
 card_copies = defaultdict(lambda: 1)
+regex = re.compile(":|\|")
 for line in lines:
-    game_name, winning_numbers, our_numbers = re.split(":|\|", line)
+    game_name, winning_numbers, our_numbers = regex.split(line)
     game_id = int(game_name.split()[-1])
 
     winning_numbers = winning_numbers.strip().split()
@@ -200,9 +202,8 @@ for line in lines:
     commons_numbers = set(winning_numbers).intersection(set(our_numbers))
 
     card_copies[game_id] -= 0
-    for _ in range(card_copies[game_id]):
-        for i in range(game_id + 1, game_id + len(commons_numbers) + 1):
-            card_copies[i] += 1
+    for i in range(game_id + 1, game_id + len(commons_numbers) + 1):
+        card_copies[i] += 1 * card_copies[game_id]
 
 
 print(sum(list(card_copies.values())))
