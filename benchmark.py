@@ -27,7 +27,7 @@ def measure_script(file_path: str) -> tuple[str, float]:
     return result_output, float(time_taken)
 
 
-def main() -> None:
+def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--file1", required=True, type=str, help="Script 1 path")
     parser.add_argument("--file2", required=True, type=str, help="Script 2 path")
@@ -50,6 +50,8 @@ def main() -> None:
     print(f"{bcolors.WARNING}{script_1_time=}s{bcolors.ENDC}")
     print(f"{bcolors.WARNING}{script_2_time=}s{bcolors.ENDC}")
 
+    return 0
+
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())
